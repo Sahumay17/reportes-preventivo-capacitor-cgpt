@@ -1,0 +1,11 @@
+.gcloudignore
+.git
+.gitignore
+node_modules/
+.gradle/
+app/build/
+build/
+.build-outputs/
+*.apk
+*.keystore
+*.log

@@ -1,0 +1,9 @@
+node_modules
+.gradle
+app/build
+build
+.build-outputs
+*.apk
+.git
+.github
+*.log
