@@ -1,0 +1,6 @@
+{
+	"appId": "com.holcim.reportesprev",
+	"appName": "Reportes Preventivo",
+	"webDir": "dist/pwa",
+	"bundledWebRuntime": false
+}

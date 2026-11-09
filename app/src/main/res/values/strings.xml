@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Reportes Preventivo</string>
+    <string name="title_activity_main">Reportes Preventivo</string>
+    <string name="package_name">com.holcim.reportesprev</string>
+    <string name="custom_url_scheme">com.holcim.reportesprev</string>
+</resources>

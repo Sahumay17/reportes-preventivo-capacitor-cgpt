@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
     "test": "node --test test/calc.test.js test/pdf.smoke.test.js",
     "build": "node build.mjs",
     "cap:sync": "npm run build && cap sync android",

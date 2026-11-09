@@ -1,0 +1,22 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#0F6E8C"><title>Reportes Preventivo</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="app.css">
+<script src="jspdf.min.js"></script></head><body>
+<header id="phead" class="print-only"><img id="plogo" alt="Holcim"><div id="ptitle"></div></header>
+<main>
+<p class="brand">Reportes Preventivo</p><h1 id="ttl"></h1><p class="m" id="sub"></p>
+<div class="chips" id="fsel" role="tablist"></div>
+<label class="fl">Fecha de inspección<input type="date" data-k="fecha" data-type="date" id="fecha"></label>
+<label class="fl" id="inspw">Nombre del inspector<input data-k="insp" id="insp" autocomplete="name"></label>
+<div class="tools"><button class="btn" id="nuevo" type="button">Nuevo reporte (borrar borrador)</button><button class="btn" id="export" type="button">Exportar respaldo (.json)</button><button class="btn" id="import" type="button">Importar respaldo</button><input type="file" id="impf" accept="application/json,.json" hidden></div>
+<div id="warn" role="status"></div>
+<div id="forms"></div>
+<h2>Fotos</h2><input type="file" id="f" accept="image/*" multiple aria-label="Agregar fotos"><p class="m" id="fmsg"></p><div id="P"></div>
+<h2>Resumen</h2><div id="sum" class="row"></div>
+<button class="btn pri" id="pdf" type="button">Generar y guardar PDF</button>
+<button class="btn" id="print" type="button" hidden>Imprimir / guardar como PDF</button>
+<p id="msg" role="status"></p>
+<details><summary>Ajustes: carpeta destino en Drive</summary><label class="fl">Enlace de la carpeta<input id="fol" inputmode="url"></label><p class="m">En la app Android el PDF se sube a esta carpeta. Aquí se comparte o se descarga al equipo.</p></details>
+</main><script src="app.js"></script></body></html>
