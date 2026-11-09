@@ -1,0 +1,4 @@
+Para uso 100 % sin internet (incluida la primera vez), copia aquí el archivo
+jspdf.umd.min.js (jsPDF 2.5.1, de https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js)
+y ejecuta de nuevo:  npm run build
+El archivo se incrusta en "Reportes Prev.html" y se copia a dist/pwa/ como jspdf.min.js.
