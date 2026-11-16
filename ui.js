@@ -51,6 +51,7 @@ function sign(k){const o=document.createElement("div");o.className="modal";
 
 /* ---- Guardar / compartir ---- */
 async function saveFile(name,blob){
+ if(window.AndroidBridge&&typeof window.AndroidBridge.saveAndShare==="function"){const dataUrl=await blobToDataURL(blob);window.AndroidBridge.saveAndShare(dataUrl.split(",")[1]||"",name,blob.type||"application/pdf");return "Guardado en Descargas/ReportesPrev y listo para compartir: "+name}
  if(window.claude&&window.claude.use){try{const dl=await window.claude.use("downloads");if(dl){await dl.save({filename:name,data:blob});return "Listo: "+name}}catch(e){if(e&&e.code==="declined")return "Guardado cancelado."}}
  const f=new File([blob],name,{type:blob.type});
  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:name});return "Elige Google Drive y la carpeta destino en el menú de compartir."}catch(e){if(e&&e.name==="AbortError")return "Guardado cancelado."}}
@@ -87,7 +88,7 @@ export async function init(){
   if((b=t.closest("[data-act]"))){if(b.dataset.act==="demo")demo[V.fm](V);else okAll(V);paint();return}
   if(FORMS[V.fm].click&&FORMS[V.fm].click(e,ctx))return;
   switch(t.id){
-   case"pdf":return generate();case"print":return window.print();
+   case"pdf":return generate();case"print":return window.AndroidBridge&&typeof window.AndroidBridge.printPage==="function"?window.AndroidBridge.printPage():window.print();
    case"export":{const o=await S.exportDraft();$("#msg").textContent=await saveFile(`Respaldo Reportes Prev ${V.fecha||""}.json`,new Blob([JSON.stringify(o)],{type:"application/json"}));return}
    case"import":return $("#impf").click();
    case"nuevo":if(!armed){armed=setTimeout(()=>{armed=0;t.textContent="Nuevo reporte (borrar borrador)"},5000);t.textContent="¿Seguro? Toca otra vez para borrar";return}

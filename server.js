@@ -63,12 +63,11 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  let reqPath = req.url.split('?')[0];
+  let reqPath = (req.url || '/').split('?')[0];
   if (reqPath === '/' || reqPath === '') {
     reqPath = '/index.html';
   }
 
-  // Health check endpoint for Cloud Run / load balancers
   if (reqPath === '/_health' || reqPath === '/healthz') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('OK');
@@ -80,6 +79,11 @@ const server = http.createServer((req, res) => {
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
+      if (path.extname(safePath)) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('404 Not Found');
+        return;
+      }
       filePath = path.join(STATIC_DIR, 'index.html');
     }
 
@@ -91,11 +95,13 @@ const server = http.createServer((req, res) => {
       }
 
       const ext = path.extname(filePath).toLowerCase();
+      const base = path.basename(filePath);
       const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+      const noCache = ext === '.html' || base === 'sw.js';
 
       res.writeHead(200, {
         'Content-Type': contentType,
-        'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600',
+        'Cache-Control': noCache ? 'no-cache, no-store, must-revalidate' : 'public, max-age=3600',
       });
       res.end(content);
     });
