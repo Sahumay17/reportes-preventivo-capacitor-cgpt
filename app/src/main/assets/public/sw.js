@@ -1,5 +1,5 @@
 // Service worker: la app completa funciona sin internet una vez instalada.
-const CACHE="rp-__VERSION__",PDF="__PDFURL__",CORE=["./","index.html","app.js","app.css","logo.png","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png"__EXTRA__];
+const CACHE="rp-5d756cc7",PDF="",CORE=["./","index.html","app.js","app.css","logo.png","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","jspdf.min.js"];
 self.addEventListener("install",e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(CORE);
  if(PDF.startsWith("http")){try{await c.put(PDF,await fetch(PDF,{mode:"no-cors"}))}catch(_){}}self.skipWaiting()})()));
 self.addEventListener("activate",e=>e.waitUntil((async()=>{for(const k of await caches.keys())if(k.startsWith("rp-")&&k!==CACHE)await caches.delete(k);await self.clients.claim()})()));
