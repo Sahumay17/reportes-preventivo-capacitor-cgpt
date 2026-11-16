@@ -28,7 +28,7 @@ if (!fs.existsSync(path.join(STATIC_DIR, 'index.html')) && fs.existsSync(path.jo
     const tail = `<script src="app.js"></script>`;
     fs.writeFileSync(path.join(STATIC_DIR, 'index.html'), tpl.replace('{{HEAD}}', head).replace('{{TAIL}}', tail));
 
-    for (const file of ['app.js', 'app.css', 'logo.png', 'manifest.webmanifest', 'sw.js', 'jspdf.min.js']) {
+    for (const file of ['app.js', 'app.css', 'logo.png', 'favicon.ico', 'manifest.webmanifest', 'sw.js', 'jspdf.min.js']) {
       const srcFile = path.join(__dirname, file);
       if (fs.existsSync(srcFile)) {
         fs.copyFileSync(srcFile, path.join(STATIC_DIR, file));

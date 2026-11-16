@@ -69,6 +69,8 @@ fs.writeFileSync(
 fs.writeFileSync(path.join(pwa, "app.js"), js);
 fs.writeFileSync(path.join(pwa, "app.css"), css);
 if (logoPath) fs.copyFileSync(logoPath, path.join(pwa, "logo.png"));
+const faviconPath = fs.existsSync("favicon.ico") ? "favicon.ico" : (fs.existsSync("public/favicon.ico") ? "public/favicon.ico" : null);
+if (faviconPath) fs.copyFileSync(faviconPath, path.join(pwa, "favicon.ico"));
 
 const manifestPath = fs.existsSync("assets/manifest.webmanifest") ? "assets/manifest.webmanifest" : (fs.existsSync("manifest.webmanifest") ? "manifest.webmanifest" : null);
 if (manifestPath) fs.copyFileSync(manifestPath, path.join(pwa, "manifest.webmanifest"));
